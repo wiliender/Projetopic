@@ -5,7 +5,7 @@
 
   <input type="search" class="filtro" v-on:input="filtro = $event.target.value" placeholder="filtre por parte do titulo">
     <ul class="lista-fotos">
-      <li class="lista-fotos-item" v-for="foto of fotos">
+      <li class="lista-fotos-item" v-for="foto of fotosComFiltro">
          <meu-painel :titulo="foto.titulo">
             <img class="imagem-responsiva" :src="foto.url" :alt="foto.titulo">
          </meu-painel> 
@@ -27,6 +27,19 @@ export default {
       titulo: "Vue.JS",
       fotos: [],
       filtro: ""
+    }
+  },
+
+  computed: {
+    fotosComFiltro() {
+      if (this.filtro) {
+        // filtra a lista, por enquanto vamos retornar uma lista em branco
+        let exp = new RegExp(this.filtro.trim(), "i");//trim() remove os espaços em branco
+        return this.fotos.filter(foto => exp.test(foto.titulo));//test() testa se a expressão está contida no titulo
+      } else {
+        // se o campo estiver vazio, não filtramos, retornamos a lista
+        return this.fotos;
+      }
     }
   },
 
