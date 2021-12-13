@@ -2,9 +2,8 @@
 <template>
     <div class="painel">
         <h2 class="painel-title">{{ titulo }}</h2>
-        <div class="painel-body">
-
-        </div>
+        <slot class="painel-body">
+        </slot>
     </div>
 </template>
 
